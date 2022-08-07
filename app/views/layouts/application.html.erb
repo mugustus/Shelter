@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shelter</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top">
+      <%= link_to 'Shelter', home_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav <%= active_class(home_path) %>">
+          <% if user_signed_in? and current_user.type == 'Adopter' %>
+          <li class="nav-item active">
+            <%= link_to 'Home', home_path, class: "nav-link" %>
+          </li>
+          <% end %>
+          <!-- Profile Link -->
+          <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to 'Profile', view_profile_path(current_user.id), class: "nav-link" %>
+          </li>    
+          <% end %>
+          <!-- Shelter Match page -->
+          <% if user_signed_in? and current_user.type == 'Shelter' %>
+          <li class="nav-item active">
+            <%= link_to "Matches (#{Rating.get_positive_count(current_user.id)})", shelter_matching_path, class: "nav-link" %>
+          </li>
+          <% end %>
+          <!-- Adopter Match page -->
+          <% if user_signed_in? and current_user.type == 'Adopter' %>
+          <li class="nav-item active">
+            <%= link_to "Matches (#{Rating.get_new_matches_count(current_user.id)})", adopters_matching_path, class: "nav-link" %>
+          </li>
+          <% end %>
+          <%
+=begin 
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+          </li>
+=end
+          %>
+          </ul>
+          <div class="collapse navbar-collapse justify-content-end">
+            <% if user_signed_in? %>
+              <span class="navbar-text" style="margin-right: 1rem"><%= current_user.email %></span>
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light' %>
+            <% else %>
+              <span class="navbar-nav" style="margin-right: 1rem"><%= link_to 'Log In', new_user_session_path, class: 'btn btn-outline-light' %></span>
+              <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-light' %>
+            <% end %>
+          </div>
+      </div>
+    </nav>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+      
+    <%= yield %>
+  </body>
+</html>

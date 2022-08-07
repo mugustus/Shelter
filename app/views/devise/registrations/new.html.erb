@@ -1,0 +1,50 @@
+<h2>Register for Shelter!</h2>
+<h6>Please input the following information below. Passwords must be six characters minimum.</h6>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, 'Confirm Password' %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, 'Phone Number' %>
+    <em>(xxx-xxx-xxxx)</em>
+    <%= f.text_field :phone_number, autocomplete: "phone-number" %>
+  </div>
+
+  <div class="radio">
+      <%= f.label :account_type, 'I\'m a(n)...' %>
+      <div class="input-form">
+          <% adopter_or_shelter = User::TYPES.map {|x| x}%>
+          <%= f.collection_radio_buttons(:type, adopter_or_shelter, :first, :last, html_options = {}) do |b|
+            b.label(class: "radio_custom") { b.radio_button(class: "radio_custom") + b.text }
+          end %>
+      </div>
+  </div> 
+
+  <div class="actions">
+    <%= f.submit "Sign up", class: "btn btn-sm btn-outline-success"%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

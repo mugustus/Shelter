@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <body class="bg-light">
+        <main role="main" class="container">
+            <!-- If there are not any ratings -->
+            <% if !@ratings.any? %>
+                    <h5 class="text-danger text-center">No Matches. Check Back Later.</h5>
+            <% end %>
+            <div class="row d-flex justify-content-left">
+            <% @ratings.each do |rating| %>
+                <div class="col-4">
+                    <!-- Each user card -->
+                    <div class="pet-card">
+                        <div class="card md-4 shadow-sm">
+                            <!-- Hardcoded temp image -->
+                            <% pet_pictures = Pet.find(rating.pet_id).pet_pics %>
+                            <% if pet_pictures.any? %>
+                                <%= image_tag(pet_pictures.first, size: "300x325", class: "card-img-top") %>
+                            <% elsif rating.species == "Chicken" %>
+                                <%= image_tag("chicken.jpg", class: "card-img-top", alt: "Card image cap") %>
+                            <% elsif rating.species == "Cat" %>
+                                <%= image_tag("cat.jpg", class: "card-img-top", alt: "Card image cap") %>
+                            <% else %>
+                                <%= image_tag("dog.jpg", class: "card-img-top", alt: "Card image cap") %>
+                            <% end %>
+                            <!-- User/Pet information -->
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title"><%= rating.pet_name %></h3>
+                                    <h3 class="card-subtitle mb-2"><%= rating.location %></h3>
+                                </div>
+                                <hr>
+                                <!-- Contact info  -->
+                                    <p class="lead"> 
+                                    <b>Shelter:</b> <%= rating.name%>
+                                    <br>
+                                    <b>Email:</b> <%= rating.email%>
+                                    <br>
+                                    <% if !rating.phone_number.nil? %>
+                                        <b>Phone Number:</b> <%= rating.phone_number%>
+                                    <% end %>
+                                    </p>                            
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <%= link_to('Shelter Profile', view_profile_path(rating.user_id), class: "btn btn-sm btn-outline-secondary") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %> <!-- End of form loop -->
+            </div>
+        </main>
+    </body>
+</html>
+

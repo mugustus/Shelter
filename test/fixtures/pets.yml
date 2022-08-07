@@ -1,0 +1,39 @@
+# == Schema Information
+#
+# Table name: pets
+#
+#  id            :integer          not null, primary key
+#  breed         :string
+#  date_of_birth :date
+#  description   :string
+#  name          :string
+#  price         :float
+#  species       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  shelter_id    :integer
+#
+# Indexes
+#
+#  index_pets_on_shelter_id  (shelter_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Mozart
+  date_of_birth: 1970-01-01
+  species: Chicken
+  breed: nil
+  description: Body packing chicken for transporting drugs. Contains $15 million of crack concain.
+  price: 15000000
+  shelter: three
+
+two:
+  name: Little Vivec
+  date_of_birth: 2002-05-01
+  species: Dog
+  breed: Nix Hound
+  description: From the plains of Vvardenfell
+  price: 1.50
+  shelter: three

@@ -1,0 +1,38 @@
+<main role="main" class="container">
+    <!-- Page Content -->
+<div class="container">
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">Hi, I'm <%= @pet.name %>!
+    </h1>
+    <h4>About Me</h4>
+    <p>I'm a <%= @pet.species %>. My specific breed is <%= @pet.breed %>. 
+       I was born on <%= @pet.date_of_birth %>. 
+
+       Want to know a little about me? I've been described as <%= @pet.description %>.
+    </p>
+
+    <div>
+    <h4>My Pictures</h4>
+    <% if @pet.pet_pics.any? %>
+        <% @pet.pet_pics.each do |pp| %>
+            <%= image_tag(pp, size: "400x400") %>
+        <% end %>
+    <% else %>
+        <em>I'm sorry, I have no pictures right now!</em>
+    <% end %>
+    </div>
+
+    <div><br />
+    <h5>Are you my shelter friend?</h5>
+    <% if !current_user.nil? && @pet.shelter_id == current_user.id %>
+        <em>Need to make changes?</em>
+        <%= link_to 'Edit Me!', edit_pet_path(@pet), class: 'btn btn-sm btn-secondary' %>
+    <% else %>
+        <em>No? Thanks for stopping by!</em>
+    <% end %>
+    </div>
+    <br>
+    
+    <%= link_to 'View Shelter', view_profile_path(@pet.shelter_id), class: 'btn btn-outline-primary'%>
+
+  </div>

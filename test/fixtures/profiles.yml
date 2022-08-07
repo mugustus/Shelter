@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id           :integer          not null, primary key
+#  description  :text
+#  email        :string
+#  location     :string
+#  name         :string
+#  phone_number :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#
+# Indexes
+#
+#  index_profiles_on_user_id  (user_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: James
+  location: TN
+  description: MyText
+  email: james@email.com
+  phone_number: (555) 555-5555
+  user: one
+
+two:
+  name: MyString
+  location: MyString
+  description: MyText
+  email: MyString
+  phone_number: MyString
+  user: two

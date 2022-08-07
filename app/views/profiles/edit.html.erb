@@ -1,0 +1,12 @@
+<main role="main" class="container">
+
+
+
+    <h1> Edit Profile </h1>
+
+    <%= render 'form', profile: @profile %>
+        <p>
+            <%= link_to 'Back', view_profile_path(@profile.user_id) %>
+        </p>
+
+</main><!-- /.container -->

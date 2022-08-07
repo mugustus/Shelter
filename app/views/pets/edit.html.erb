@@ -1,0 +1,10 @@
+<main role="main" class="container">
+
+    <h1> Edit Pet Entry </h1>
+
+    <%= render 'form', pet: @pet %>
+    <p>
+        <%= link_to 'Back', view_pet_path(@pet.id) %>
+    </p>
+
+</main><!-- /.container -->

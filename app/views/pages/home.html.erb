@@ -1,0 +1,87 @@
+<!doctype html>
+<html> 
+    <body class="bg-light">
+
+        <main role="main" class="container">
+<%
+=begin      WIP Heading
+
+            <div class="starter-template">
+                <h1>Homepage WIP</h1>
+                <p class="lead">You can add links to whatever pages you are working on here until we get the website more originized.</p>
+            </div>
+=end
+%>
+            <div class="row d-flex justify-content-center">
+                <!-- Left column (currently only has negative rating button) -->
+                <div class="col text-center align-self-center">
+                    <!-- Negative Button Form -->
+                    <%= form_tag(controller: "pages", action: "rate") do %>
+                        <%= hidden_field_tag(:positive, false) %>
+                        <%= hidden_field_tag(:pet_id, @pet.id) %>
+                        <%= hidden_field_tag(:adopter_id, current_user.id) %>
+                        <div class="action">
+                            <%= submit_tag('X', class: "btn btn-danger btn-rating") %>
+                        </div>
+                    <% end %> 
+                    <!-- End Negative button form -->
+                </div>
+                <!-- Center column: for pet desplay window -->
+                <div class="col-6">
+                    <!-- Pet Desplay window -->
+                    <!-- Modified from https://getbootstrap.com/docs/4.1/examples/album/ -->
+                    <!-- Card bootstrap docs (for my own reference): https://getbootstrap.com/docs/4.0/components/card/ -->
+                    <div class="card md-8 shadow-sm">
+                        <!-- Hardcoded temp image -->
+                        <% pet_pictures = Pet.find(@pet.id).pet_pics %>
+                        <% if pet_pictures.any? %>
+                            <%= image_tag(pet_pictures.first, size: "538x538", class: "shadow") %>
+                        <% elsif @pet.species == "Chicken" %>
+                            <%= image_tag("chicken.jpg", class: "card-img-top", alt: "Card image cap") %>
+                        <% elsif @pet.species == "Cat" %>
+                            <%= image_tag("cat.jpg", class: "card-img-top", alt: "Card image cap") %>
+                        <% else %>
+                            <%= image_tag("dog.jpg", class: "card-img-top", alt: "Card image cap") %>
+                        <% end %>
+                        <!-- Pet information -->
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title"><%= @pet.name %></h3>
+                                <h3 class="card-subtitle mb-2"><%= @pet.age %></h3>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-subtitle mb-2 text-muted"><%= @pet.species + (@pet.breed != nil ? ': ' + @pet.breed : "") %></h5>
+                                <h5 class="card-subtitle mb-2 text-muted"><%= sprintf("$%.2f", @pet.price) %></h5>
+                            </div>
+                            <hr>
+                            <p class="card-text"><%= @pet.description %></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <%= link_to('View Shelter', view_profile_path(@pet.shelter_id), class: "btn btn-sm btn-outline-secondary")%>
+                                </div>
+                            <small class="text-muted"><%= @pet.shelter_name %></small>
+                            </div>
+                        </div>
+                        <!-- End of Pet information -->
+                    </div>  
+                    <!-- End of Pet Desplay window -->                    
+                </div>
+                <!-- End center column -->
+                <!-- Right column (currently only has positive rating button) -->
+                <div class="col text-center align-self-center">
+                    <!-- Positive Button Form -->
+                    <%= form_tag(controller: "pages", action: "rate") do %>
+                        <%= hidden_field_tag(:positive, true) %>
+                        <%= hidden_field_tag(:pet_id, @pet.id) %>
+                        <%= hidden_field_tag(:adopter_id, current_user.id) %>
+                        <div class="action">
+                            <%= submit_tag('✓', class: "btn btn-success btn-rating") %>
+                        </div>
+                    <% end %> 
+                    <!-- End Positive button form -->
+                </div>
+                <!-- End right column -->               
+            </div>
+        </main>
+    </body>
+</html>

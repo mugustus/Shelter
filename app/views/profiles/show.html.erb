@@ -1,0 +1,66 @@
+<main role="main" class="container">
+    <body class="bg-light">
+    <!-- Page Content -->
+        <!-- Portfolio Item Heading -->
+
+        <!-- Portfolio Item Row -->
+            <div class="row align-items-left">
+                <div class="col-md-5">
+                    <% if @profile.profile_pic.attached? %>
+                        <%= image_tag(@profile.profile_pic, size: "400x400", class: "shadow") %>
+                    <% else %>
+                        <%= image_tag("silhouette.jpg", size: "400x400", class: "shadow") %>
+                    <% end %>
+                </div>
+
+                <div class="col-md-6">
+                <br>
+                    <h1 class="card-title"><%= @profile.name %></h1>
+                    <hr>
+                    <div class="card-body">
+                        <p><%= @profile.description %></p>
+                        <hr>
+                        <ul>
+                            <li><b>Phone number:</b> <%= @profile.phone_number %></li> 
+                            <li><b>Email address:</b> <%= @profile.email %></li> 
+                            <li><b>Home address:</b> <%= @profile.location %></li>
+                        </ul>
+                        <% if current_user.id == @profile.user_id %>
+                            <%= link_to 'Edit', edit_profile_path(@profile), class: 'btn btn-sm btn-outline-primary' %>
+                        <% end %>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- Add edit profile button somewhere around here -->
+
+            <!-- Format this better and add an if statment to only show for shelters -->
+            <% if @type == "Shelter"%>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Species</th>
+                        <th scope="col">Date of Birth</th>
+                        <% if current_user.id == @profile.user_id %>
+                        <th>
+                        <% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @pets.each do |pet| %>
+                    <tr>
+                        <td><%= link_to pet.name, view_pet_path(pet.id) %></td>
+                        <td><%= pet.species %></td>
+                        <td><%= pet.date_of_birth %></td>
+                        <% if current_user.id == @profile.user_id %>
+                        <td><%= link_to 'Edit', edit_pet_path(pet.id), class: "btn btn-outline-primary" %>
+                        <% end %>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+            <% end %>
+    </body>
+</main>

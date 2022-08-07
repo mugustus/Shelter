@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: ratings
+#
+#  id                :integer          not null, primary key
+#  approved          :boolean
+#  positive          :boolean
+#  viewed            :boolean
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  rated_pet_id      :integer
+#  rating_adopter_id :integer
+#
+# Indexes
+#
+#  index_ratings_on_rated_pet_id       (rated_pet_id)
+#  index_ratings_on_rating_adopter_id  (rating_adopter_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  positive: true
+  pet: one
+  adopter: one
+
+two:
+  positive: false
+  pet: two
+  adopter: two

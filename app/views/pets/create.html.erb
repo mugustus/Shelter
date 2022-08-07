@@ -1,0 +1,44 @@
+<main role="main" class="container">
+
+    <h1> Pet Information </h1>
+
+    <%= form_for @pet, url: new_profile_path(@pet), :method => :POST do |form| %>
+
+        <div class="field">
+            <%= form.label :date_of_birth %>
+            <%= form.text_field :date_of_birth, class: 'form-control' %>
+        </div>
+
+        <div class="field">
+            <%= form.label :breed %>
+            <%= form.text_field :breed, class: 'form-control' %>
+        </div>
+
+        <div class="field">
+            <%= form.label :date_of_birth %>
+            <%= form.text_field :date_of_birth, class: 'form-control' %>
+        </div>
+
+        <div class="field">
+            <%= form.label :description %>
+            <%= form.text_field :description, class: 'form-control' %>
+        </div>
+        
+        <div class="field">
+            <%= form.label :price %>
+            <%= form.text_field :price, class: 'form-control' %>
+        </div>
+
+        <div class="field">
+            <%= form.label :species %>
+            <%= form.text_field :species, class: 'form-control' %>
+        </div>
+
+        <div class="actions">
+            <%= form.submit 'Submit', class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+
+    <p>
+        <%= button_to 'Back', edit_profile_path%>
+    </p>

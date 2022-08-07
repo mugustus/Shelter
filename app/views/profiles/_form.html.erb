@@ -1,0 +1,60 @@
+<% if current_user.nil? %>
+    <em>You are currently not logged in.</em>
+<% elsif current_user.id == @profile.user_id %>
+    <%= form_for @profile do |form| %>
+        
+        <div class="row">
+            <div class="col md-4">
+                <div class="field">
+                    <br />
+                    <% if @profile.profile_pic.attached?%>
+                        <%= image_tag(@profile.profile_pic, size: "400x400", class: "shadow-sm")  %>
+                    <% else %>
+                        <%= image_tag("silhouette.jpg", size: "400x400", class: "shadow-sm") %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col align-items-left">
+            <br>
+            <br>
+                <div class="field">
+                    <%= form.label :profile_pic, 'Profile Picture' %>
+                    <em>(Resized to 400x400)</em><br />
+                    <%= form.file_field :profile_pic %>
+                </div>            
+
+                <div class="field">
+                    <%= link_to 'Remove Picture', delete_profile_pic_profiles_url(@profile.user_id), class: "btn btn-danger",
+                            method: :delete if @profile.profile_pic.attached? %>
+                </div>
+
+            </div>
+        </div>
+        <div class='field'>
+            <%=form.label :name %>
+            <%= form.text_field :name, class:'form-control'%>
+        </div>
+
+        <div class='field'>
+            <%=form.label :location %>
+            <%= form.text_field :location, class:'form-control'%>
+        </div>
+
+        <div class='field'>
+            <%=form.label :phone_number %>
+            <%= form.text_field :phone_number, class:'form-control'%>
+        </div>
+
+        <div class='field'>
+            <%=form.label :description %>
+            <%= form.text_field :description, class:'form-control'%>
+        </div>
+
+        <div class='actions'>
+            <%= form.submit 'Submit', class:'btn btn-primary'%>
+        </div>
+
+    <% end %>
+<% else %>
+    <em>You have no business being here!</em>
+<% end %>
