@@ -7,7 +7,7 @@
 ## Who Did What in the Video
 
 - 00:26:00
-  - Contributor: Brad
+  - Contributor: Brad, Mario
   - Contribution: Developed the log-in page that receives registered user information and appropriately assigns sessions to users.
   - Task IDs: PR #22
 
@@ -32,7 +32,7 @@
   - Task IDs: PR #66 PR #37
 
 - 01:32:00
-  - Contributor: Brad
+  - Contributor: Brad, Mario
   - Contribution: Granted users the ability to upload profile pictures which are linked to that user's account elsewhere in the site.
   - Task IDs: PR #54
 
@@ -67,7 +67,7 @@
   - Task IDs: #66
 
 - 03:35:00
-  - Contributor: Brad
+  - Contributor: Brad, Mario
   - Contribution: Edit page installed for pets so that their information may later be modified by their shelter owners.
   - Task IDs: PR #61
 
